@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+//package grpc;
+
+option go_package = "example.com/proto";
+
+message Avance {
+    int32 correr = 1;
+    int32 numeroj = 2;
+}
+
+message Muerte {
+    int32 sn = 1;
+}
+
+message Empuje {
+    int32 fuerza = 1;
+    int32 numeroj = 2;
+}
+
+message Resultado {
+    string Resultado = 1;
+}
+
+message Inicio {
+    int32 id = 1;
+}
+
+message Jugador {
+    int32 IdJugador = 1;
+    bool Estado = 2;
+}
+
+message EntradaJugador{
+    bool Aceptar = 1;
+}
+
+message Jugadores{
+    string message = 1;
+    bool confirmacion = 2;
+}
+
+message Confirm {
+ bool respuesta = 1;
+}
+
+message Res {
+ int32 res = 1;
+}
+message SolLider {
+ string jugador = 1;
+ string etapa = 2;
+}
+
+message ResLider {
+ string jugadas = 1;
+}
+
+message MsjLider {
+ string jugador = 1;
+ string jugadas = 2;
+}
+service Lider {
+    //rpc Create(CreateWishListReq) returns (CreateWishListResp);
+    //rpc Add(AddItemReq) returns (AddItemResp);
+    //rpc List(ListWishListReq) returns (ListWishListResp);
+    //Entrada a Squid Game se le asigna el numero del jugador
+    rpc Entrar (EntradaJugador) returns (Jugador) {};  
+    rpc EntrarRespuesta (Jugador) returns (EntradaJugador) {};  
+    //Aviso de Etapa
+    rpc IniciarEtapa(Inicio) returns (Jugadores) {};
+    //Envia avance para primer juego, retorna si el jugadore muere o no
+    rpc Correr(Avance) returns (Muerte) {}
+    //Empujes segundo juego, retorna si el jugador muere o no + mensaje del equipo
+    rpc Tirar(Empuje) returns (Resultado) {}
+    rpc SavePlayer (MsjLider) returns (Confirm) {};
+    rpc ShowPlayer (SolLider) returns (ResLider) {};
+    rpc EntrarRespuestaNN (Res) returns (Res) {};
+    rpc SolData1 (Res) returns (MsjLider) {};
+    rpc SolData2 (Res) returns (SolLider) {};
+
+}

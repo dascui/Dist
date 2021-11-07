@@ -49,7 +49,7 @@ func solicitarEntrada() string {
 
 func main() {
 	var num int32=1
-	conn, err := grpc.Dial("localhost:50055", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.6.43.0:50055", grpc.WithInsecure())
 
 	if err != nil {
 		panic("cannot connect with server " + err.Error())
